@@ -7,4 +7,6 @@ module group.vinylproject {
     exports group6.vinylproject;
     exports view;
     opens view to javafx.fxml;
+    exports viewmodel;
+    opens viewmodel to javafx.fxml;
 }
