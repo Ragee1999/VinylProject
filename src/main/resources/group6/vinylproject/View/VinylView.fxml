@@ -20,7 +20,7 @@
       <Button layoutX="550.0" layoutY="88.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="136.0" text="Reservation" />
       <Button layoutX="550.0" layoutY="130.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="136.0" text="Create Vinyl" />
       <Button layoutX="550.0" layoutY="175.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="136.0" text="Return" />
-      <Button layoutX="550.0" layoutY="219.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="136.0" text="Remove" />
+      <Button layoutX="550.0" layoutY="219.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="136.0" text="Remove" fx:id="removeButton" />
        <Button layoutX="550.0" layoutY="263.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="136.0" text="Borrow" />
       <Label layoutX="25.0" layoutY="36.0" prefHeight="28.0" prefWidth="112.0" text="Vinyl Library">
          <font>

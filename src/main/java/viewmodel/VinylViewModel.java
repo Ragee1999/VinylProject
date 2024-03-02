@@ -18,4 +18,9 @@ public class VinylViewModel {
     public ObservableList<Vinyl> getVinylList() {
         return vinylList;
     }
+
+    public void markVinylForRemoval(Vinyl vinyl) {
+        vinyl.markForRemoval();
+        vinyl.removeFromLibrary(vinylList);
+    }
 }

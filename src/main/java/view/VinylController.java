@@ -1,6 +1,7 @@
 package view;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import model.Vinyl;
@@ -23,6 +24,9 @@ public class VinylController {
     @FXML
     private TableColumn<Vinyl, String> lendingStateColumn;
 
+    @FXML
+    private Button removeButton;
+
     private final VinylViewModel viewModel = new VinylViewModel();
 
     @FXML
@@ -32,6 +36,13 @@ public class VinylController {
         artistColumn.setCellValueFactory(cellData -> cellData.getValue().artistProperty());
         releaseYearColumn.setCellValueFactory(cellData -> cellData.getValue().releaseYearProperty().asObject());
         lendingStateColumn.setCellValueFactory(cellData -> cellData.getValue().lendingStateProperty());
+        removeButton.setOnAction(event -> removeSelectedVinyl());
     }
 
+    private void removeSelectedVinyl() {
+        Vinyl selectedVinyl = vinylTableView.getSelectionModel().getSelectedItem();
+        if (selectedVinyl != null) {
+            viewModel.markVinylForRemoval(selectedVinyl);
+        }
+    }
 }
