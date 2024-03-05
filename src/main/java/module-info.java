@@ -9,4 +9,6 @@ module group.vinylproject {
     opens view to javafx.fxml;
     exports viewmodel;
     opens viewmodel to javafx.fxml;
+    exports model;
+    opens model to javafx.fxml;
 }
