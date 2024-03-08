@@ -13,22 +13,22 @@ import java.io.IOException;
 
 public class ReserveAndBorrow {
 
-    private final IntegerProperty Vinylid;
+    private final IntegerProperty vinylId;
     private final BooleanProperty Reserved;
     private final BooleanProperty Borrowed;
     private final BooleanProperty Available;
 
 
-    public ReserveAndBorrow(Integer vinylid, boolean reserved, boolean borrowed, boolean available) {
-       this.Vinylid = new SimpleIntegerProperty(vinylid);
+    public ReserveAndBorrow(Integer vinylId, boolean reserved, boolean borrowed, boolean available) {
+       this.vinylId = new SimpleIntegerProperty(vinylId);
         this.Reserved = new SimpleBooleanProperty(false);
         this.Borrowed = new SimpleBooleanProperty(borrowed);
         this.Available = new SimpleBooleanProperty(false);
     }
 
 
-    public IntegerProperty vinylidProperty() {
-        return Vinylid;
+    public IntegerProperty vinylIdProperty() {
+        return vinylId;
     }
 
     public BooleanProperty reservedProperty() {
@@ -44,7 +44,5 @@ public class ReserveAndBorrow {
     }
 
 
-    public ObservableValue<Integer> vinylIdProperty() {
-        return vinylIdProperty(); //this one needs a check!!
-    }
+
 }

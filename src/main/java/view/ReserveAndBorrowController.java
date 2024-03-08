@@ -13,25 +13,25 @@ public class ReserveAndBorrowController {
     private TableView<ReserveAndBorrow> ReserveAndBorrowTableView;
 
     @FXML
-    private TableColumn<ReserveAndBorrow, Integer> Vinylid;
+    private TableColumn<ReserveAndBorrow, Integer> vinylIdColumn;
 
     @FXML
-    private TableColumn<ReserveAndBorrow, Boolean> Reserved;
+    private TableColumn<ReserveAndBorrow, Boolean> ReservedColumn;
 
     @FXML
-    private TableColumn<ReserveAndBorrow, Boolean> Borrowed;
+    private TableColumn<ReserveAndBorrow, Boolean> BorrowedColumn;
 
     @FXML
-    private TableColumn<ReserveAndBorrow, Boolean> Available;
+    private TableColumn<ReserveAndBorrow, Boolean> AvailableColumn;
 
     private final ReserveAndBorrowViewModel viewModel = new ReserveAndBorrowViewModel();
 
     @FXML
     public void initialize() {
         ReserveAndBorrowTableView.setItems(viewModel.getReserveAndBorrowsList());
-        Vinylid.setCellValueFactory(cellData -> cellData.getValue().vinylIdProperty());  //check ReserveAndBorrow.java
-        Reserved.setCellValueFactory(cellData -> cellData.getValue().reservedProperty());
-        Borrowed.setCellValueFactory(cellData -> cellData.getValue().borrowedProperty());
-        Available.setCellValueFactory(cellData -> cellData.getValue().availableProperty());
+        vinylIdColumn.setCellValueFactory(cellData -> cellData.getValue().vinylIdProperty().asObject());
+        ReservedColumn.setCellValueFactory(cellData -> cellData.getValue().reservedProperty());
+        BorrowedColumn.setCellValueFactory(cellData -> cellData.getValue().borrowedProperty());
+        AvailableColumn.setCellValueFactory(cellData -> cellData.getValue().availableProperty());
     }
 }
