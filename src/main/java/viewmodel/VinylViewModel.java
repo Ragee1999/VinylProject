@@ -20,7 +20,16 @@ public class VinylViewModel {
     }
 
     public void markVinylForRemoval(Vinyl vinyl) {
-        vinyl.markForRemoval();
-        vinyl.removeFromLibrary(vinylList);
+        // Check if the vinyl is in an "Available" state and remove it immediately.
+        if ("Available".equals(vinyl.lendingStateProperty().get())) {
+            removeVinylImmediately(vinyl);
+        } else {
+            // For "Reserved" or other states, mark it for removal.
+            vinyl.markForRemoval();
+        }
+    }
+
+    private void removeVinylImmediately(Vinyl vinyl) {
+        vinylList.remove(vinyl);
     }
 }

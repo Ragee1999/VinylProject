@@ -50,4 +50,8 @@ public class Vinyl {
             vinylList.remove(this);
         }
     }
+
+    public boolean isMarkedForRemoval() {
+        return markedForRemoval.get();
+    }
 }
