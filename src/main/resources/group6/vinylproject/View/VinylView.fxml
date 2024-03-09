@@ -7,21 +7,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.VinylController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.VinylController">
    <children>
-      <TableView fx:id="vinylTableView" layoutX="14.0" layoutY="88.0" prefHeight="336.0" prefWidth="517.0">
+      <TableView fx:id="vinylTableView" layoutX="14.0" layoutY="95.0" prefHeight="336.0" prefWidth="517.0">
         <columns>
-          <TableColumn fx:id="titleColumn" prefWidth="105.0" text="Title" />
-          <TableColumn fx:id="artistColumn" prefWidth="96.0" text="Artist" />
-            <TableColumn fx:id="releaseYearColumn" prefWidth="104.0" text="Release year" />
-            <TableColumn fx:id="lendingStateColumn" prefWidth="211.0" text="Lending state" />
+            <TableColumn fx:id="lastUserColumn" prefWidth="73.0" text="User" />
+          <TableColumn fx:id="titleColumn" prefWidth="116.0" text="Title" />
+          <TableColumn fx:id="artistColumn" prefWidth="107.0" text="Artist" />
+            <TableColumn fx:id="releaseYearColumn" prefWidth="89.0" text="Release year" />
+            <TableColumn fx:id="lendingStateColumn" prefWidth="131.0" text="Lending state" />
         </columns>
       </TableView>
-      <Button layoutX="550.0" layoutY="88.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="136.0" text="Reservation" />
-      <Button layoutX="550.0" layoutY="130.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="136.0" text="Create Vinyl" />
-      <Button layoutX="550.0" layoutY="175.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="136.0" text="Return" />
-      <Button layoutX="550.0" layoutY="219.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="136.0" text="Remove" />
-       <Button layoutX="550.0" layoutY="263.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="136.0" text="Borrow" />
+      <Button fx:id="reserveButton" layoutX="550.0" layoutY="88.0" mnemonicParsing="false" onAction="#reserveAction" prefHeight="28.0" prefWidth="136.0" text="Reservation" />
+      <Button layoutX="550.0" layoutY="219.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="136.0" text="Create Vinyl" />
+      <Button fx:id="returnButton" layoutX="550.0" layoutY="175.0" mnemonicParsing="false" onAction="#returnAction" prefHeight="28.0" prefWidth="136.0" text="Return" />
+      <Button layoutX="550.0" layoutY="263.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="136.0" text="Remove" />
+       <Button fx:id="borrowButton" layoutX="550.0" layoutY="132.0" mnemonicParsing="false" onAction="#borrowAction" prefHeight="28.0" prefWidth="136.0" text="Borrow" />
       <Label layoutX="25.0" layoutY="36.0" prefHeight="28.0" prefWidth="112.0" text="Vinyl Library">
          <font>
             <Font name="System Bold" size="18.0" />

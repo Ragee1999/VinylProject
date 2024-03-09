@@ -1,21 +1,24 @@
 package model;
 
 import javafx.beans.property.*;
-
+import model.states.AvailableState;
 
 public class Vinyl {
-    private final StringProperty title;
-    private final StringProperty artist;
-    private final IntegerProperty releaseYear;
-    private final StringProperty lendingState;
 
-    public Vinyl(String title, String artist, int releaseYear, String lendingState) {
-        this.title = new SimpleStringProperty(title);
-        this.artist = new SimpleStringProperty(artist);
-        this.releaseYear = new SimpleIntegerProperty(releaseYear);
-        this.lendingState = new SimpleStringProperty(lendingState);
+    private final StringProperty title = new SimpleStringProperty(this, "title");
+    private final StringProperty artist = new SimpleStringProperty(this, "artist");
+    private final IntegerProperty releaseYear = new SimpleIntegerProperty(this, "releaseYear");
+    private final ObjectProperty<LendingState> lendingState;
+    private final StringProperty lastUserName = new SimpleStringProperty("No user");
+
+
+    public Vinyl(String title, String artist, int releaseYear) {
+        this.title.set(title);
+        this.artist.set(artist);
+        this.releaseYear.set(releaseYear);
+        this.lendingState = new SimpleObjectProperty<>(new AvailableState(this));
+        this.lastUserName.set("No user");
     }
-
 
     public StringProperty titleProperty() {
         return title;
@@ -29,7 +32,46 @@ public class Vinyl {
         return releaseYear;
     }
 
-    public StringProperty lendingStateProperty() {
+    public String getTitle() {
+        return title.get();
+    }
+
+
+
+    public LendingState getLendingState() {
+        return lendingState.get();
+    }
+
+    public void setLendingState(LendingState newState) {
+        this.lendingState.set(newState);
+    }
+
+    public void reserve() {
+        lendingState.get().reserve();
+    }
+
+    public void borrow() {
+        lendingState.get().borrow();
+    }
+
+    public void returnVinyl() {
+        lendingState.get().returnVinyl();
+    }
+
+    public ObjectProperty<LendingState> lendingStateProperty() {
         return lendingState;
+    }
+
+    public StringProperty lastUserNameProperty() {
+        return lastUserName;
+    }
+
+
+    public void setLastUser(User user) {
+        if (user != null) {
+            this.lastUserName.set(user.getName());
+        } else {
+            this.lastUserName.set("No user");
+        }
     }
 }
