@@ -4,11 +4,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.User;
 import model.Vinyl;
+import model.states.*;
 
 
 public class VinylViewModel {
 
     private final ObservableList<Vinyl> vinyls = FXCollections.observableArrayList();
+    private final User currentUser;
+
+    public VinylViewModel(User currentUser) {
+        this.currentUser = currentUser;
+    }
 
     public ObservableList<Vinyl> getVinyls() {
         return vinyls;
@@ -41,5 +47,49 @@ public class VinylViewModel {
                 new Vinyl("Title 8", "Artist H", 2023),
                 new Vinyl("Title 9", "Artist I", 1999)
         );
+    }
+
+    public void borrowAction(Vinyl selectedVinyl) {
+        if (selectedVinyl != null) {
+            if (selectedVinyl.getLendingState() instanceof AvailableState) {
+                System.out.println("Cannot borrow. Vinyl is not reserved.");
+            } else if (selectedVinyl.getLendingState() instanceof ReservedState) {
+                borrowVinyl(selectedVinyl, currentUser);
+                selectedVinyl.setLastUser(currentUser);
+                selectedVinyl.setLendingState(new BorrowedState(selectedVinyl));
+            } else {
+                System.out.println("Cannot borrow. Vinyl is already borrowed.");
+            }
+        } else {
+            System.out.println("Please select a vinyl to borrow.");
+        }
+    }
+
+    public void returnAction(Vinyl selectedVinyl) {
+        if (selectedVinyl != null) {
+            if (selectedVinyl.getLendingState() instanceof BorrowedState) {
+                returnVinyl(selectedVinyl, currentUser);
+                selectedVinyl.setLastUser(null);
+                selectedVinyl.setLendingState(new AvailableState(selectedVinyl));
+            } else {
+                System.out.println("Cannot return. Vinyl is not borrowed.");
+            }
+        } else {
+            System.out.println("Please select a vinyl to return.");
+        }
+    }
+
+    public void reserveAction(Vinyl selectedVinyl) {
+        if (selectedVinyl != null) {
+            if (selectedVinyl.getLendingState() instanceof AvailableState) {
+                reserveVinyl(selectedVinyl, currentUser);
+                selectedVinyl.setLastUser(currentUser);
+                selectedVinyl.setLendingState(new ReservedState(selectedVinyl));
+            } else {
+                System.out.println("Cannot reserve. Vinyl is not available.");
+            }
+        } else {
+            System.out.println("Please select a vinyl to reserve.");
+        }
     }
 }

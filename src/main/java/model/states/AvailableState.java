@@ -24,7 +24,7 @@ public class AvailableState implements LendingState {
 
     @Override
     public void returnVinyl() {
-        // Already available
+
     }
 
     @Override
