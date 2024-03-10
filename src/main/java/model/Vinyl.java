@@ -1,7 +1,7 @@
 package model;
 
 import javafx.beans.property.*;
-import model.states.AvailableState;
+import model.states.*;
 
 public class Vinyl {
 
@@ -10,6 +10,7 @@ public class Vinyl {
     private final IntegerProperty releaseYear = new SimpleIntegerProperty(this, "releaseYear");
     private final ObjectProperty<LendingState> lendingState;
     private final StringProperty lastUserName = new SimpleStringProperty("No user");
+    private final BooleanProperty markedForRemoval = new SimpleBooleanProperty(false);
 
 
     public Vinyl(String title, String artist, int releaseYear) {
@@ -35,7 +36,6 @@ public class Vinyl {
     public String getTitle() {
         return title.get();
     }
-
 
 
     public LendingState getLendingState() {
@@ -73,5 +73,22 @@ public class Vinyl {
         } else {
             this.lastUserName.set("No user");
         }
+    }
+
+
+    public void remove() {
+        if (getLendingState() instanceof AvailableState && !markedForRemoval.get()) {
+            markedForRemoval.set(true);
+            System.out.println(getTitle() + " marked for removal and removed immediately as it is available.");
+        } else if ((getLendingState() instanceof ReservedState || getLendingState() instanceof BorrowedState) && !markedForRemoval.get()) {
+            markedForRemoval.set(true);
+            System.out.println(getTitle() + " marked for removal. It will be removed when it becomes available.");
+        } else {
+            System.out.println(getTitle() + " is already marked for removal.");
+        }
+    }
+
+    public BooleanProperty markedForRemovalProperty() {
+        return markedForRemoval;
     }
 }

@@ -33,6 +33,23 @@ public class VinylViewModel {
     public void returnVinyl(Vinyl vinyl, User user) {
         vinyl.returnVinyl();
         vinyl.setLastUser(user);
+        checkAndRemoveVinyl(vinyl);
+    }
+
+    private void checkAndRemoveVinyl(Vinyl vinyl) {
+        if (vinyl.markedForRemovalProperty().get() && vinyl.getLendingState() instanceof AvailableState) {
+            vinyls.remove(vinyl);
+            System.out.println(vinyl.getTitle() + " has been removed from the library.");
+        }
+    }
+
+    public void removeVinylIfAvailable(Vinyl vinyl) {
+        if (vinyl.getLendingState() instanceof AvailableState) {
+            vinyls.remove(vinyl);
+            System.out.println(vinyl.getTitle() + " has been removed from the library because it was available.");
+        } else {
+            vinyl.remove();
+        }
     }
 
     public void loadVinyls() {
