@@ -1,25 +1,10 @@
 package model;
 
 import javafx.beans.property.*;
-<<<<<<< HEAD
 import javafx.collections.ObservableList;
-
-
-public class Vinyl {
-    private final StringProperty title;
-    private final StringProperty artist;
-    private final IntegerProperty releaseYear;
-    private final StringProperty lendingState;
-    private final BooleanProperty markedForRemoval;
-
-    public Vinyl(String title, String artist, int releaseYear, String lendingState) {
-        this.title = new SimpleStringProperty(title);
-        this.artist = new SimpleStringProperty(artist);
-        this.releaseYear = new SimpleIntegerProperty(releaseYear);
-        this.lendingState = new SimpleStringProperty(lendingState);
-        this.markedForRemoval = new SimpleBooleanProperty(false);
-=======
 import model.states.AvailableState;
+import model.states.BorrowedState;
+import model.states.ReservedState;
 
 public class Vinyl {
 
@@ -28,6 +13,7 @@ public class Vinyl {
     private final IntegerProperty releaseYear = new SimpleIntegerProperty(this, "releaseYear");
     private final ObjectProperty<LendingState> lendingState;
     private final StringProperty lastUserName = new SimpleStringProperty("No user");
+    private final BooleanProperty markedForRemoval = new SimpleBooleanProperty(false);
 
 
     public Vinyl(String title, String artist, int releaseYear) {
@@ -36,7 +22,6 @@ public class Vinyl {
         this.releaseYear.set(releaseYear);
         this.lendingState = new SimpleObjectProperty<>(new AvailableState(this));
         this.lastUserName.set("No user");
->>>>>>> Rageevan
     }
 
     public StringProperty titleProperty() {
@@ -54,8 +39,6 @@ public class Vinyl {
     public String getTitle() {
         return title.get();
     }
-
-
 
     public LendingState getLendingState() {
         return lendingState.get();
@@ -81,32 +64,9 @@ public class Vinyl {
         return lendingState;
     }
 
-<<<<<<< HEAD
-    public BooleanProperty markedForRemovalProperty() {
-        return markedForRemoval;
-    }
-
-    public void markForRemoval() {
-        if ("Available".equals(lendingState.get()) || "Reserved".equals(lendingState.get())) {
-            markedForRemoval.set(true);
-        }
-    }
-
-    public void removeFromLibrary(ObservableList<Vinyl> vinylList) {
-        if (markedForRemoval.get()) {
-            vinylList.remove(this);
-        }
-    }
-
-    public boolean isMarkedForRemoval() {
-        return markedForRemoval.get();
-    }
-}
-=======
     public StringProperty lastUserNameProperty() {
         return lastUserName;
     }
-
 
     public void setLastUser(User user) {
         if (user != null) {
@@ -115,5 +75,20 @@ public class Vinyl {
             this.lastUserName.set("No user");
         }
     }
+
+    public void remove() {
+        if (getLendingState() instanceof AvailableState && !markedForRemoval.get()) {
+            markedForRemoval.set(true);
+            System.out.println(getTitle() + " marked for removal and removed immediately as it is available.");
+        } else if ((getLendingState() instanceof ReservedState || getLendingState() instanceof BorrowedState) && !markedForRemoval.get()) {
+            markedForRemoval.set(true);
+            System.out.println(getTitle() + " marked for removal. It will be removed when it becomes available.");
+        } else {
+            System.out.println(getTitle() + " is already marked for removal.");
+        }
+    }
+
+    public BooleanProperty markedForRemovalProperty() {
+        return markedForRemoval;
+    }
 }
->>>>>>> Rageevan

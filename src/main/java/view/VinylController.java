@@ -30,10 +30,9 @@ public class VinylController {
     private TableColumn<Vinyl, String> artistColumn;
     @FXML
     private TableColumn<Vinyl, User> lastUserColumn;
-
-
     @FXML
     private Button removeButton;
+
 
     private final VinylViewModel viewModel = new VinylViewModel();
     private final User currentUser = new User("User 1"); // IDE user is always user 1
@@ -49,18 +48,6 @@ public class VinylController {
         releaseYearColumn.setCellValueFactory(cellData -> cellData.getValue().releaseYearProperty().asObject());
         titleColumn.setCellValueFactory(cellData -> cellData.getValue().titleProperty());
         lendingStateColumn.setCellValueFactory(cellData -> cellData.getValue().lendingStateProperty());
-<<<<<<< HEAD
-        removeButton.setOnAction(event -> removeSelectedVinyl());
-    }
-
-    private void removeSelectedVinyl() {
-        Vinyl selectedVinyl = vinylTableView.getSelectionModel().getSelectedItem();
-        if (selectedVinyl != null) {
-            viewModel.markVinylForRemoval(selectedVinyl);
-        }
-    }
-}
-=======
         lastUserColumn.setCellValueFactory(cellData -> {
             Vinyl vinyl = cellData.getValue();
             StringProperty lastUserNameProperty = vinyl.lastUserNameProperty();
@@ -77,6 +64,7 @@ public class VinylController {
         vinylTableView.setItems(viewModel.getVinyls());
         viewModel.loadVinyls();
         simulateActions();
+        removeButton.setOnAction(event -> removeSelectedVinyl());
     }
 
 
@@ -182,5 +170,14 @@ public class VinylController {
             System.out.println("Please select a vinyl to reserve.");
         }
     }
+
+    @FXML
+    public void removeSelectedVinyl() {
+        Vinyl selectedVinyl = vinylTableView.getSelectionModel().getSelectedItem();
+        if (selectedVinyl != null) {
+            viewModel.removeVinylIfAvailable(selectedVinyl);
+        } else {
+            System.out.println("Please select a vinyl to remove.");
+        }
+    }
 }
->>>>>>> Rageevan

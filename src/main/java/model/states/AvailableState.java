@@ -12,8 +12,12 @@ public class AvailableState implements LendingState {
 
     @Override
     public void reserve() {
-        System.out.println(vinyl.getTitle() + " is now reserved.");
-        vinyl.setLendingState(new ReservedState(vinyl));
+        if (!vinyl.markedForRemovalProperty().get()) {
+            System.out.println(vinyl.getTitle() + " is now reserved.");
+            vinyl.setLendingState(new ReservedState(vinyl));
+        } else {
+            System.out.println(vinyl.getTitle() + " is marked for removal and cannot be reserved.");
+        }
     }
 
     @Override
