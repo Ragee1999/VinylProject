@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="248.0" prefWidth="218.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AddVinylController">
+   <children>
+      <Label layoutX="55.0" layoutY="33.0" text="Add new Vinyl">
+         <font>
+            <Font name="Britannic Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="addTitle" layoutX="35.0" layoutY="70.0" promptText="Title:"  />
+      <TextField fx:id="addArtist" layoutX="35.0" layoutY="115.0" promptText="Artist:" />
+      <TextField fx:id="addYear" layoutX="35.0" layoutY="158.0" promptText="Release Year:" />
+      <Button layoutX="35.0" layoutY="200.0" mnemonicParsing="false" onAction="#confirmVinyl" text="Confirm" />
+      <Button layoutX="132.0" layoutY="200.0" mnemonicParsing="false" onAction="#cancelVinyl" text="Cancel" />
+   </children>
+</AnchorPane>

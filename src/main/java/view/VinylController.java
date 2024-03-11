@@ -2,15 +2,23 @@ package view;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 import model.LendingState;
 import model.Simulation;
 import model.User;
 import model.Vinyl;
+import viewmodel.AddVinylViewModel;
 import viewmodel.VinylViewModel;
+
+import java.io.IOException;
 
 
 public class VinylController {
@@ -32,10 +40,12 @@ public class VinylController {
 
 
     private final VinylViewModel viewModel;
+    private final AddVinylViewModel addVinylViewModel;
 
 
     public VinylController() {
         this.viewModel = new VinylViewModel(new User("User 1"));
+        this.addVinylViewModel = new AddVinylViewModel(FXCollections.observableArrayList());
     }
 
     @FXML
@@ -62,6 +72,7 @@ public class VinylController {
         viewModel.loadVinyls();
         Simulation.simulateActions(viewModel.getVinyls());
         removeButton.setOnAction(event -> removeSelectedVinyl());
+        addVinylViewModel.addVinylListener(vinyl -> vinylTableView.getItems().add(vinyl));
     }
 
     @FXML
@@ -92,6 +103,30 @@ public class VinylController {
         }
     }
 
+
+    private Stage addVinylStage; // Reference to the add vinyl stage
+
+
+    public void openAddVinylWindow() {
+        if (addVinylStage == null || !addVinylStage.isShowing()) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/group6/vinylproject/View/createVinyl.fxml"));
+            try {
+                Parent root = loader.load();
+                AddVinylController addVinylController = loader.getController();
+                addVinylController.initialize(addVinylViewModel);
+
+                addVinylStage = new Stage();
+                addVinylStage.setScene(new Scene(root));
+                addVinylStage.setTitle("Add Vinyl");
+                addVinylStage.setOnCloseRequest(event -> addVinylStage = null);
+                addVinylStage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            addVinylStage.toFront();
+        }
+    }
 }
 
 

@@ -36,6 +36,8 @@ public class VinylViewModel {
         checkAndRemoveVinyl(vinyl);
     }
 
+
+
     private void checkAndRemoveVinyl(Vinyl vinyl) {
         if (vinyl.markedForRemovalProperty().get() && vinyl.getLendingState() instanceof AvailableState) {
             vinyls.remove(vinyl);

@@ -17,7 +17,6 @@ public class ReservedState implements LendingState {
 
     @Override
     public void borrow() {
-        System.out.println(vinyl.getTitle() + " is now borrowed.");
         vinyl.setLendingState(new BorrowedState(vinyl));
     }
 
@@ -32,3 +31,4 @@ public class ReservedState implements LendingState {
         return "Reserved";
     }
 }
+

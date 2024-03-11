@@ -16,7 +16,7 @@
         </columns>
       </TableView>
       <Button fx:id="reserveButton" layoutX="550.0" layoutY="88.0" mnemonicParsing="false" onAction="#reserveAction" prefHeight="28.0" prefWidth="136.0" text="Reservation" />
-      <Button layoutX="550.0" layoutY="219.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="136.0" text="Create Vinyl" />
+      <Button fx:id="addVinyl" layoutX="550.0" layoutY="219.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="136.0" text="Add Vinyl" onAction="#openAddVinylWindow" />
       <Button fx:id="returnButton" layoutX="550.0" layoutY="175.0" mnemonicParsing="false" onAction="#returnAction" prefHeight="28.0" prefWidth="136.0" text="Return" />
       <Button fx:id="removeButton" layoutX="550.0" layoutY="263.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="136.0" text="Remove" />
        <Button fx:id="borrowButton" layoutX="550.0" layoutY="132.0" mnemonicParsing="false" onAction="#borrowAction" prefHeight="28.0" prefWidth="136.0" text="Borrow" />

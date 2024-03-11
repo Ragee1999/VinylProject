@@ -76,7 +76,7 @@ public class Vinyl {
     }
 
 
-    public void remove() {
+    /* public void remove() {
         if (getLendingState() instanceof AvailableState && !markedForRemoval.get()) {
             markedForRemoval.set(true);
             System.out.println(getTitle() + " marked for removal and removed immediately as it is available.");
@@ -86,9 +86,23 @@ public class Vinyl {
         } else {
             System.out.println(getTitle() + " is already marked for removal.");
         }
+    } */
+
+    public void remove() {
+        if (!markedForRemoval.get()) {
+            markedForRemoval.set(true);
+            System.out.println(getTitle() + " marked for removal.");
+        } else {
+            System.out.println(getTitle() + " is already marked for removal.");
+        }
     }
 
     public BooleanProperty markedForRemovalProperty() {
         return markedForRemoval;
+    }
+
+
+    public String getLastUserName() {
+        return lastUserName.get();
     }
 }
