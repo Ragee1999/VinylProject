@@ -73,6 +73,7 @@ public class VinylController {
         Simulation.simulateActions(viewModel.getVinyls());
         removeButton.setOnAction(event -> removeSelectedVinyl());
         addVinylViewModel.addVinylListener(vinyl -> vinylTableView.getItems().add(vinyl));
+
     }
 
     @FXML

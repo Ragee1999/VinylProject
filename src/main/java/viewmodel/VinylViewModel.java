@@ -36,7 +36,21 @@ public class VinylViewModel {
         checkAndRemoveVinyl(vinyl);
     }
 
+    private void addMarkedForRemovalListener(Vinyl vinyl, ObservableList<Vinyl> vinyls) {
+        vinyl.markedForRemovalProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue && vinyl.getLendingState() instanceof AvailableState) {
+                vinyls.remove(vinyl);
+                System.out.println(vinyl.getTitle() + " has been removed from the library.");
+            }
+        });
 
+        vinyl.lendingStateProperty().addListener((obs, oldState, newState) -> {
+            if (vinyl.markedForRemovalProperty().get() && newState instanceof AvailableState) {
+                vinyls.remove(vinyl);
+                System.out.println(vinyl.getTitle() + " has been removed from the library.");
+            }
+        });
+    }
 
     private void checkAndRemoveVinyl(Vinyl vinyl) {
         if (vinyl.markedForRemovalProperty().get() && vinyl.getLendingState() instanceof AvailableState) {
@@ -66,6 +80,10 @@ public class VinylViewModel {
                 new Vinyl("Title 8", "Artist H", 2023),
                 new Vinyl("Title 9", "Artist I", 1999)
         );
+
+        for (Vinyl vinyl : vinyls) {
+            addMarkedForRemovalListener(vinyl, vinyls);
+        }
     }
 
     public void borrowAction(Vinyl selectedVinyl) {
